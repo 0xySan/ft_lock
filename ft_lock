@@ -1,9 +1,24 @@
 #!/usr/bin/env python3
-import os, warnings, subprocess, pygame, sys, time, datetime, threading
-from restrict_keys import disable_keys
 
+import os
+import warnings
+
+# Must be set BEFORE importing pygame
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+# Must be set BEFORE importing pygame
 warnings.filterwarnings("ignore", message=".*avx2.*")
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
+# Now safe to import pygame and everything else
+import subprocess
+import pygame
+import sys
+import time
+import datetime
+import threading
+
+from restrict_keys import disable_keys
 
 PASSWORD = "4242"
 IMAGE_PATH = "/home/etaquet/Pictures/background.jpg"
