@@ -20,13 +20,16 @@ import threading
 
 from restrict_keys import disable_keys
 
+USER=os.environ.get("USER")
+
 PASSWORD = "4242"
-IMAGE_PATH = "/home/etaquet/Pictures/background.jpg"
+print(USER)
+IMAGE_PATH = f"/home/{USER}/Pictures/background.jpg"
 FPS = 30
 IDLE_TIMEOUT = 10  # seconds before screen off
 SSH_PORT = "42312"
 SSH_USER = "etaquet"
-HOST_IP_FILE = "/home/etaquet/share/Host-IP"
+HOST_IP_FILE = "/home/{USER}/share/Host-IP"
 
 # --- get host IP dynamically ---
 try:
