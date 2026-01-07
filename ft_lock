@@ -21,13 +21,28 @@ import threading
 from restrict_keys import disable_keys
 
 USER=os.environ.get("USER")
+PATH=f"/home/{USER}/.pass"
 
-PASSWORD = "1112"
+passwd = None;
+if not os.path.exists(PATH):
+	from getpass import getpass
+	passwd = getpass()
+	with open(PATH, "w") as f:
+		f.write(passwd)
+else:
+	with open(PATH, "r") as f:
+        	passwd = f.read()
+
+if passwd:
+	PASSWORD = passwd
+else:
+	PASSWORD = "ERROR"
+
 IMAGE_PATH = f"/home/{USER}/Pictures/background.jpg"
 FPS = 30
 IDLE_TIMEOUT = 10  # seconds before screen off
 SSH_PORT = "42312"
-SSH_USER = "etaquet"
+SSH_USER = USER
 HOST_IP_FILE = f"/home/{USER}/share/Host-IP"
 
 # --- get host IP dynamically ---
