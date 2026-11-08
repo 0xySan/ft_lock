@@ -1,0 +1,64 @@
+# ft_lock layout — every visual thing on the lock screen is one entry of `elements`.
+# Edit by hand or visually:  python3 ft_lock.py --edit      Order = stacking order (last is on top).
+#
+# Common keys   id, type, x, y, anchor (nw n ne w center e sw s se), visible, seconds, enabled
+# type: text    text, color, size, font, bold, italic, shadow, width (wrap), align, command, interval, shell
+# type: image   path, width, height, fit (contain|stretch)
+# type: rect    width, height, color (fill), border, border_width, radius
+# type: input   width, height, radius, color (border), bg, text_color, size, gloss     (x,y = top-left)
+# type: weather size, color, text_color                                                (x,y = top-left)
+# type: <name>  your own widget from widgets/<name>.py — every other key is passed to it as a parameter
+# Text placeholders: {username} {message} {elapsed} {clock} {clock24} {time} {date} {date_long} {hostname}
+#   {city} {temp} {weather} {locked_seconds} {locked_minutes} {output} + anything in config `variables`
+# visible: always | after_logout_timeout | after_force_timeout | after_seconds | before_seconds (+ seconds: N)
+version: 2
+screen:
+  width: 1920
+  height: 1080
+elements:
+- id: locked_text
+  type: text
+  x: 351
+  y: 69
+  anchor: s
+  text: Locked by {username} · {elapsed}
+  color: '#c8d2e6'
+  size: 13
+- id: message
+  type: text
+  x: 351
+  y: 86
+  anchor: s
+  text: '{message}'
+  color: '#8a96aa'
+  size: 11
+  italic: true
+- id: password_input
+  type: input
+  x: 231
+  y: 101
+- id: clock
+  type: text
+  x: 1900
+  y: 18
+  anchor: ne
+  text: '{clock}'
+  color: accent
+  size: 16
+  font: Ubuntu Mono
+  bold: true
+  shadow: true
+- id: weather
+  type: weather
+  x: 1814
+  y: 1010
+- id: logout_warning
+  type: text
+  x: 960
+  y: 516
+  anchor: center
+  text: PRESS ESCAPE TO LOGOUT
+  color: '#ff4444'
+  size: 32
+  bold: true
+  visible: after_logout_timeout

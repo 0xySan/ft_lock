@@ -1,0 +1,46 @@
+# ft_lock configuration  (YAML — indentation matters, quote strings containing # or :)
+# Search order: --config FILE, ~/.config/ft_lock/config.yaml, then this file.
+# Validate with:  python3 ft_lock.py --check      Try it safely with:  python3 ft_lock.py --preview
+version: 2
+
+layout: default.yaml        # where everything is placed; edit visually with:  python3 ft_lock.py --edit
+widgets_dir: widgets        # folder with your coded widgets (widgets/<type>.py)
+
+lock:
+  timeout: 5                # seconds without activity before the screen goes to sleep (dpms off)
+  logout_timeout: 30        # minutes before Escape is allowed to log you out
+  logout_timeout_force: 42  # minutes before you are logged out automatically
+  allow_escape_logout: true # false = only the forced logout can end the session without the password
+  password_text: ""         # "Hello" -> typing shows H, He, Hel... instead of dots (extra keys show dots)
+
+display:
+  username: ""              # shown name, empty = $USER
+  message: "Back sOOn.."    # available in any text as {message}
+  background_image: ""      # png/jpg/gif (animated gifs work); relative paths are resolved next to this file
+  background_fit: stretch   # stretch | cover | contain
+  background_color: "#1a0a1e"
+  accent_color: "#5a7ab0"   # use  color: accent  in the layout to follow this
+  font_family: Ubuntu
+  scale_layout: true        # scale the layout's `screen` size to the real screen resolution
+
+weather:
+  api_key: ""               # openweathermap.org key (or env OPENWEATHER_API_KEY)
+  city: Paris               # or env FT_LOCK_CITY
+
+# Background carousel: rotate through several images / animated GIFs (replaces display.background_image).
+carousel:
+  enabled: false
+  folder: ""                # every png/jpg/gif/webp/bmp of this folder (sorted by name), e.g. ~/Pictures/wallpapers
+  images: []                # and/or explicit files:  [wall1.png, "~/Pictures/loop.gif"]
+  mode: interval            # launch   = a different image each time you lock (remembered between launches)
+                            # interval = same, and it keeps changing while locked every `interval` seconds
+  interval: 60              # seconds between images (mode: interval, minimum 2)
+  order: sequential         # sequential | random (random never repeats the previous image)
+  transition: fade          # fade | none   (cross-fade; needs Pillow)
+
+# Your own {placeholders} for any text element. A plain value, or a command refreshed every N seconds:
+variables:
+  motto: "42 forever"
+  kernel:
+    command: "uname -r"
+    interval: 600
